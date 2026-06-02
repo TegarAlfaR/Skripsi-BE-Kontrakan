@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Unit.init({
+    unit_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     user_id: DataTypes.INTEGER,
     unit_name: DataTypes.STRING,
     rental_price: DataTypes.FLOAT,

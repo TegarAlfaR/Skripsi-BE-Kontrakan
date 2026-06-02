@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Detail_unit.init({
+    detail_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     unit_id: DataTypes.INTEGER,
     total_rooms: DataTypes.INTEGER,
     livingroom: DataTypes.INTEGER,
