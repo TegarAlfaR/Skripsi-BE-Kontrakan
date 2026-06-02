@@ -55,6 +55,58 @@ const login = async (req, res) => {
   }
 };
 
+const register = async (req, res) => {
+  try {
+    const { role, name, email, password, phone_number } = req.body;
+
+    const defaultPhoto =
+      "https://ik.imagekit.io/epqufjrrv/boy.jpg?updatedAt=1732007400483";
+
+    if (!role || !name || !email || !password || !phone_number) {
+      return res.status(400).json({
+        status: "failed",
+        message: "role, name, email, password, phone_number are required",
+        data: null,
+      });
+    }
+
+    const existingUser = await User.findOne({ where: { email: email } });
+
+    if (existingUser) {
+      return res.status(400).json({
+        status: "failed",
+        message: "email already exist",
+        data: null,
+      });
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await User.create({
+      role,
+      name,
+      email,
+      password: hashPassword,
+      phone_number,
+      profile_photo: defaultPhoto,
+      status: "active",
+    });
+
+    return res.status(201).json({
+      status: "success",
+      message: "register success",
+      data: newUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+      data: null,
+    });
+  }
+};
+
 module.exports = {
   login,
+  register
 };
