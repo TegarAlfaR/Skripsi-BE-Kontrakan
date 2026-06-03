@@ -11,6 +11,8 @@ const router = require("./routers");
 const notFound = require("./middlewares/notFound");
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.status(200).json({
