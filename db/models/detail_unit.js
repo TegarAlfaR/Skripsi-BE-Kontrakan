@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Detail_unit.belongsTo(models.Unit, {
+        foreignKey: 'unit_id',
+        as: 'unit'
+      })
     }
   }
   Detail_unit.init({

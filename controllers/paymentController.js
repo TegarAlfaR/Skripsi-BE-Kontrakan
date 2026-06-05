@@ -4,7 +4,7 @@ const createPayment = async (req, res) => {
   try {
     const { tenant_name, amount, payment_date, notes } = req.body;
 
-    const ownerId = req.user.id;
+    const userId = req.user.id;
 
     if (!tenant_name || !amount || !payment_date) {
       return res.status(400).json({
@@ -15,7 +15,7 @@ const createPayment = async (req, res) => {
     }
 
     const newPayment = await Payment.create({
-      user_id: ownerId,
+      user_id: userId,
       tenant_name,
       amount,
       payment_date,
