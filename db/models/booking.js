@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       hometown: DataTypes.STRING,
       birth_place_date: DataTypes.STRING,
       gender: DataTypes.STRING,
+      booking_status: {
+        type: DataTypes.ENUM("pending", "accepted", "rejected"),
+        defaultValue: "pending",
+      },
     },
     {
       sequelize,

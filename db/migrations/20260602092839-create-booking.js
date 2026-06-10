@@ -33,6 +33,10 @@ module.exports = {
       gender: {
         type: Sequelize.STRING
       },
+      booking_status: {
+        type: Sequelize.ENUM('pending', 'accepted', 'rejected'),
+        defaultValue: 'pending'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
