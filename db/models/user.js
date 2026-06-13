@@ -38,7 +38,10 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       phone_number: DataTypes.STRING,
       profile_photo: DataTypes.STRING,
-      status: DataTypes.STRING,
+      status: {
+        type: DataTypes.ENUM("active", "blocked"),
+        defaultValue: "active",
+      },
     },
     {
       sequelize,

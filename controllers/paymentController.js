@@ -104,7 +104,11 @@ const deletePayment = async (req, res) => {
 
 const getPayment = async (req, res) => {
   try {
-    const payment = await Payment.findAll();
+    const payment = await Payment.findAll({
+      where: {
+        user_id: req.user.id,
+      },
+    });
 
     if (!payment) {
       return res.status(404).json({
@@ -132,7 +136,12 @@ const getPaymentById = async (req, res) => {
   try {
     const paymentId = req.params.id;
 
-    const payment = await Payment.findByPk(paymentId);
+    const payment = await Payment.findOne({
+      where: {
+        payment_id: paymentId,
+        user_id: req.user.id,
+      },
+    });
 
     if (!payment) {
       return res.status(404).json({
